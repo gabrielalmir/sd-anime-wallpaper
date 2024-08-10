@@ -5,7 +5,7 @@ import type { CreatePromptDTO, ImageUpscaler } from "../dto/create-prompt.dto";
 
 export class PuppeteerService {
     async generate({ prompt, negative, qualityTags, resolution, upscaler }: CreatePromptDTO): Promise<ImageServiceResponse> {
-        const browser = await puppeteer.launch({ headless: false });
+        const browser = await puppeteer.launch({ headless: env.NODE_ENV === 'production' });
         let image: Buffer;
 
         try {
