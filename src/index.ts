@@ -1,5 +1,6 @@
 import { env } from "./config/env";
 import { CreatePromptDTO } from "./image/dto/create-prompt.dto";
+import { ImageGenerationMethod } from "./image/enums/image-generation-method.enum";
 import { ImageService } from "./image/service/image.service";
 
 import fs from 'fs/promises';
@@ -22,7 +23,7 @@ async function main() {
     });
 
     const imageService = new ImageService();
-    const { image, filename } = await imageService.generate(prompt, false);
+    const { image, filename } = await imageService.generate(prompt, ImageGenerationMethod.GRADIO);
 
     await fs.writeFile(path.join(env.OUTPUT_DIR, filename), image)
 }

@@ -1,20 +1,27 @@
 import { Client } from "@gradio/client";
 import { LoggerService } from "../../logger/logger.service";
-import type { GradioResponse } from "../@types/gradio";
-import type { ImageServiceResponse } from "../@types/image-response";
 import type { CreatePromptDTO } from "../dto/create-prompt.dto";
+import { ImageGenerationMethod } from "../enums/image-generation-method.enum";
+import type { GradioResponse } from "../interfaces/gradio";
+import type { ImageServiceResponse } from "../interfaces/image-response";
 import { PuppeteerService } from "./puppeteer.service";
 
 export class ImageService {
     private readonly logger = LoggerService.new();
     private readonly puppeteer = new PuppeteerService();
 
-    async generate(prompt: CreatePromptDTO, browser: boolean = false): Promise<ImageServiceResponse> {
-        if (browser) {
-            return await this.browser(prompt);
+    async generate(prompt: CreatePromptDTO, method: ImageGenerationMethod): Promise<ImageServiceResponse> {
+        const commands = {
+            [ImageGenerationMethod.BROWSER]: this.browser,
+            [ImageGenerationMethod.GRADIO]: this.gradio,
+        };
+
+        const command = commands[method];
+        if (!command) {
+            throw new Error(`Method ${method} not implemented`);
         }
 
-        return await this.gradio(prompt);
+        return command(prompt);
     }
 
     async browser(prompt: CreatePromptDTO): Promise<ImageServiceResponse> {

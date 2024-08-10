@@ -1,7 +1,7 @@
 import puppeteer, { Page } from "puppeteer";
 import { env } from "../../config/env";
-import type { ImageServiceResponse } from "../@types/image-response";
 import type { CreatePromptDTO, ImageUpscaler } from "../dto/create-prompt.dto";
+import type { ImageServiceResponse } from "../interfaces/image-response";
 
 export class PuppeteerService {
     async generate({ prompt, negative, qualityTags, resolution, upscaler }: CreatePromptDTO): Promise<ImageServiceResponse> {
