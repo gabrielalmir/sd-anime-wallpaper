@@ -22,7 +22,7 @@ async function main() {
     });
 
     const imageService = new ImageService();
-    const { image, filename } = await imageService.generate(prompt, true);
+    const { image, filename } = await imageService.generate(prompt, false);
 
     await fs.writeFile(path.join(env.OUTPUT_DIR, filename), image)
 }

@@ -1,18 +1,18 @@
-export type InferenceResponse = [InferenceImages[], InferencePrompt]
+export type GradioResponse = [GradioImages[], GradioPrompt]
 
-export interface InferenceImages {
-    image: InferenceImage
+export interface GradioImages {
+    image: GradioImage
     caption: any
 }
 
-export interface InferenceImage {
+export interface GradioImage {
     orig_name: string
     path: string
     url: string
     is_stream: false
 }
 
-export interface InferencePrompt {
+export interface GradioPrompt {
     prompt: string
     negative_prompt: string
     resolution: string
@@ -24,10 +24,10 @@ export interface InferencePrompt {
     add_quality_tags: boolean
     quality_tags: string
     use_upscaler: any
-    Model: InferenceImageModel
+    Model: GradioImageModel
 }
 
-export interface InferenceImageModel {
+export interface GradioImageModel {
     Model: string
     "Model hash": string
 }

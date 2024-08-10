@@ -1,7 +1,7 @@
 import { Client } from "@gradio/client";
 import { LoggerService } from "../../logger/logger.service";
+import type { GradioResponse } from "../@types/gradio";
 import type { ImageServiceResponse } from "../@types/image-response";
-import type { InferenceResponse } from "../@types/interference";
 import type { CreatePromptDTO } from "../dto/create-prompt.dto";
 import { PuppeteerService } from "./puppeteer.service";
 
@@ -14,14 +14,14 @@ export class ImageService {
             return await this.browser(prompt);
         }
 
-        return await this.api(prompt);
+        return await this.gradio(prompt);
     }
 
     async browser(prompt: CreatePromptDTO): Promise<ImageServiceResponse> {
         return await this.puppeteer.generate(prompt);
     }
 
-    private async api({ prompt, negative, resolution, upscaler, sampler, guidance, inferenceSteps, qualityTags, stylePreset }: CreatePromptDTO) {
+    private async gradio({ prompt, negative, resolution, upscaler, sampler, guidance, inferenceSteps, qualityTags, stylePreset }: CreatePromptDTO) {
         this.logger.debug(prompt, "received");
 
         const api = await Client.connect("cagliostrolab/animagine-xl-3.1");
@@ -43,7 +43,7 @@ export class ImageService {
             false,
         ]);
 
-        const data = result.data as InferenceResponse;
+        const data = result.data as GradioResponse;
         this.logger.debug(data[1])
 
         const image = data[0][0].image;
