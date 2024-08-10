@@ -1,0 +1,24 @@
+{
+  "name": "sd-anime-wallpaper",
+  "module": "src/index.ts",
+  "type": "module",
+  "scripts": {
+    "start": "node --env-file=.env dist/src/index.js",
+    "build": "bun build ./src --target=node --minify --outdir=dist",
+    "deploy": "bun run build ; bun start",
+    "dev": "bun src/index.ts"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@gradio/client": "^1.5.0",
+    "pino": "^9.3.2",
+    "pino-pretty": "^11.2.2",
+    "puppeteer": "^23.0.2",
+    "zod": "^3.23.8"
+  }
+}
