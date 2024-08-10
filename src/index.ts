@@ -17,7 +17,8 @@ async function main() {
             enabled: true,
             multiplier: 1.5,
             strength: 0.55
-        }
+        },
+        qualityTags: 'Heavy v3.1'
     });
 
     const imageService = new ImageService();
