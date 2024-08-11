@@ -47,7 +47,7 @@ export class ImageService {
             upscaler?.enabled ?? false,
             upscaler?.strength ?? 0,
             upscaler?.multiplier ?? 1,
-            false,
+            true,
         ]);
 
         const data = result.data as GradioResponse;
