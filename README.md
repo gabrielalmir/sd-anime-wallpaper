@@ -8,7 +8,7 @@
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/your-username/sd-anime-wallpaper.git
+    git clone https://github.com/gabrielalmir/sd-anime-wallpaper.git
     ```
 2. Install dependencies:
     ```bash
@@ -21,7 +21,7 @@
 Generate an image with the following command:
 
 ```bash
-node dist/src/index.js generate [options]
+node dist/main.js generate [options]
 ```
 
 ## Options
@@ -37,7 +37,7 @@ node dist/src/index.js generate [options]
 ## Example
 
 ```bash
-node dist/src/index.js generate -p "A beautiful anime landscape" -w 1920 -h 1080 -u true,2.0,0.75 -q "Heavy v3.1" -m gradio -o ./images
+node dist/main.js generate -p "A beautiful anime landscape" -w 1920 -h 1080 -u true,2.0,0.75 -q "Heavy v3.1" -m gradio -o ./images
 ```
 ## Configuration
 Adjust settings in config/env.js as needed or using the enviromnent variables.
