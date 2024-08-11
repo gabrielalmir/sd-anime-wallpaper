@@ -4,6 +4,7 @@ const envSchema = z.object({
     // general
     NODE_ENV: z.string().default('development'),
     OUTPUT_DIR: z.string().default('output'),
+    APP_MODE: z.string().default('cli'),
     // hugging face
     HUGGING_MODEL: z.string(),
     HUGGING_SPACE_URL: z.string(),

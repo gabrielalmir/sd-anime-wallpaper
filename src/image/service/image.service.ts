@@ -12,8 +12,8 @@ export class ImageService {
 
     async generate(prompt: CreatePromptDTO, method: ImageGenerationMethod): Promise<ImageServiceResponse> {
         const commands = {
-            [ImageGenerationMethod.BROWSER]: this.browser,
-            [ImageGenerationMethod.GRADIO]: this.gradio,
+            [ImageGenerationMethod.BROWSER]: this.browser.bind(this),
+            [ImageGenerationMethod.GRADIO]: this.gradio.bind(this),
         };
 
         const command = commands[method];
