@@ -29,13 +29,13 @@ export class PuppeteerService {
 
             // generate image
             image = await this.queueImageGeneration(page);
+            await browser.close();
+
+            return { image, filename: `${crypto.randomUUID()}.png` };
         } catch (error) {
+            await browser.close();
             throw error;
         }
-
-        await browser.close();
-
-        return { image, filename: `${crypto.randomUUID()}.png` };
     }
 
     private async setPrompts(page: Page, prompt: string, negative: string) {
@@ -99,7 +99,7 @@ export class PuppeteerService {
         await page.click(env.CSS_GENERATE_BUTTON_PATH, { delay: 500 });
 
         await new Promise(resolve => setTimeout(resolve, 30_000));
-        await page.waitForSelector(env.CSS_IMAGE_PREVIEW_PATH);
+        await page.waitForSelector(env.CSS_IMAGE_PREVIEW_PATH, { timeout: 60_000 });
 
         // Get image of the url
         const image = await page.$(env.CSS_IMAGE_PREVIEW_PATH);
