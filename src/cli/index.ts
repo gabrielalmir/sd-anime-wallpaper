@@ -49,6 +49,7 @@ export async function cli() {
                 const imageGenerationMethod = options.method as ImageGenerationMethod;
                 const { image, filename } = await imageService.generate(promptDTO, imageGenerationMethod);
 
+                await fs.mkdir(options.output, { recursive: true });
                 await fs.writeFile(path.join(options.output, filename), image);
                 console.log(`Image generated successfully: ${filename}`);
             } catch (error) {
@@ -58,4 +59,3 @@ export async function cli() {
 
     cmd.parse(process.argv);
 }
-
